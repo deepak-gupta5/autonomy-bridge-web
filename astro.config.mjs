@@ -65,10 +65,14 @@ const topLevelCanonicalPaths = new Set([
   '/bespoke-research',
   '/about',
   '/contact',
+  '/sitemap',
+]);
+
+// Legal/utility pages -- excluded from sitemap (thin content, Google declines to index)
+const legalPaths = new Set([
   '/privacy-policy',
   '/terms-of-use',
   '/cookie-policy',
-  '/sitemap',
 ]);
 
 const detailRoutePrefixes = [
@@ -102,7 +106,7 @@ function toPathname(entry) {
 }
 
 function isAllowedSitemapPath(pathname) {
-  if (legacyPaths.has(pathname) || isDateBasedPath(pathname)) {
+  if (legacyPaths.has(pathname) || legalPaths.has(pathname) || isDateBasedPath(pathname)) {
     return false;
   }
 
